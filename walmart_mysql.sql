@@ -38,3 +38,9 @@ SELECT
     FROM walmart
     GROUP BY city;
     
+-- 6. Calculate the total profit for each category by considering total profit as (unit_price * quantity * profit_margin).alter
+-- List category and total_profit, ordered from highest to lowest profit.
+SELECT category, SUM(unit_price * quantity * profit_margin) AS total_profit FROM walmart
+GROUP BY category
+ORDER BY total_profit DESC;
+    
