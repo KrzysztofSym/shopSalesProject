@@ -44,3 +44,11 @@ SELECT category, SUM(unit_price * quantity * profit_margin) AS total_profit FROM
 GROUP BY category
 ORDER BY total_profit DESC;
     
+-- 7. Determine the most common payment method for each Branch.
+-- Display Branch and the preferred_payment_method.
+WITH cet AS
+(SELECT branch, payment_method, COUNT(*) AS transactions_no,
+RANK() OVER(PARTITION BY branch ORDER BY COUNT(*) DESC) AS ranki FROM walmart
+GROUP BY 1, 2)
+SELECT * FROM cet
+WHERE ranki = 1;
